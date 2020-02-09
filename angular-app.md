@@ -75,8 +75,38 @@ Staring point for angular projects. Contains a basic angular app with html templ
 
 1. Create the first component: user-list component. We can use ```ng generate component``` but we'll do this by hand this time
    1. Create user/user-list.component.ts: create UserListComponent class, add @Component decorator with selector, templateUrl. Add a list of users
+      1. NOTE the ```user``` parameter cannot be private. Private variables are not visible from the template
    1. Create user-list.component.html. Use template #2
    1. Update app.component.html to ```<user-list></user-list>```
    1. Import and add UserListComponent to the declarations in AppModule
+
+1. Create the UserThumbnail component:
+   1. Create user/user-thumbnail.component.ts. Create an input (```@Input```) parameter ```user```. 
+      1. Same view as previously (#2 in templates)
+      1. UserList component will display user-thumbnail and pass the user variable down using: ```<user-thumbnail> [user]=user[0]></user-thumbnail>```
+      1. Add the usual import, declarations in AppModule
+
+1. Input, output and template variables
+   1. Input variables: ```@Input``` variables are used to pass input to a component as done in the previous step
+   1. Output variables: to pass data back to the parent component
+      * create an @Output variable of type EventEmitter in the child: @Output() eventClick = new EventEmitter();
+      * when you need to emit this, say on a button press in the child component, do this: this.eventClick.emit('foo')
+      * in the parent: <user-thumbnail (eventClick)="handleEventClicked($event)" [user]="users[0]"></user-thumbnail>
+   1. Tempate reference variables:
+      * a parent component can access any public property or method in a child component directly using template variables
+      * template variable is defined in the parent component when using the child component, like this:
+        ```<user-thumbnail #thumbnail [user]="users[0]"></user-thumbnail>```
+      * now in the parent, you can call thumbnail.method1(), assuming method1 is a public method in the child. Or thumbnail.property1 etc.
+   1. So, parent/child component communication can be done with:
+      1. input variables
+      1. output variables
+      1. template variables
+
+1. Styling
+   * In userthumbnail, we have this: ```<span>&nbsp;</span>```. Replace this with ```<span class="pad-left">``` and define pad-left in the UserThumbnail component style css:
+      ```css
+      .pad-left { margin-left: 10px; }
+      ```
+   * NOTE: style defined in a component is namespaced to that    component. So it's not affecting the parent. Even though the parent is using the same class, the styling is encapsulated and does not bleed out to the parent. Reverse is also true, styles defined in the parent component are not applied to the child. This is angular's built in view encapsulation. If you inspect, the name of the classes are dynamically created. Styles from styles.css (app level) are applied globally across the whole app
 
 

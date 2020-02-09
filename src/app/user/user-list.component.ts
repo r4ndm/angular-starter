@@ -7,8 +7,7 @@ import { IUser, ILocation } from './user.interface';
     templateUrl: './user-list.component.html'
 })
 export class UserListComponent {
-    private users = userList;
-    public user = userList[0];
+    public users = userList;
 }
 
 const userList: IUser[] = [
