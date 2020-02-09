@@ -39,8 +39,7 @@ Staring point for angular projects. Contains a basic angular app with html templ
          ```json
          "extends": ["tslint:recommended", "tslint-plugin-prettier", "tslint-config-prettier"]
          "rules": {
-             "prettier": true,
-             ...
+             "prettier": true,s
          }
          ```
 
@@ -50,3 +49,29 @@ Staring point for angular projects. Contains a basic angular app with html templ
 1. Create assets/images folder and put some .png files there. We will use these images in the app
    1. Illustrates src/assets is part of assets folders in angular.json
 1. Added to src/style.css some global styles that we'll use
+1. Add bootstrap. We're adding a variant of bootstrap:
+   ```npm install ngf-bootstrap --save```
+   This brings in bootstrap and jquery dependencies that are old. TODO: Try using bootstrap directly
+   1. In angular.json, add to styles and scripts sections:
+      ```json
+      "styles": [
+        "node_modules/ngf-bootstrap/dist/bootstrap.min.css",
+        "src/styles.css"
+      ],
+      "scripts": [
+        "node_modules/jquery/dist/jquery.min.js",
+        "node_modules/bootstrap/dist/js/bootstrap.js"
+      ]
+      ```
+      Order of styles is important. Place global src/styles.css at the end 
+      <br>
+      Stop/restart the server. Background is now black
+1. Add some bootstrap formatting:
+   <br>
+   In index.html, replace ```<body>``` with ```<body class="container">```
+   <br>
+   So index.html looks like #1 in html-templates.md
+
+
+
+
