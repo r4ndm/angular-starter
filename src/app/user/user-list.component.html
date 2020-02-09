@@ -1,2 +1,10 @@
 
-<user-thumbnail [user]=users[0]></user-thumbnail>
+   <div>
+    <h1>Users</h1>
+    <hr>
+    <div class="row">
+        <div *ngFor="let userItem of users" class="col-md-5">
+            <user-thumbnail [user]="userItem"></user-thumbnail>
+        </div>
+    </div>
+   </div>

@@ -109,4 +109,69 @@ Staring point for angular projects. Contains a basic angular app with html templ
       ```
    * NOTE: style defined in a component is namespaced to that    component. So it's not affecting the parent. Even though the parent is using the same class, the styling is encapsulated and does not bleed out to the parent. Reverse is also true, styles defined in the parent component are not applied to the child. This is angular's built in view encapsulation. If you inspect, the name of the classes are dynamically created. Styles from styles.css (app level) are applied globally across the whole app
 
+1. NavBar
+   1. Create the NavBar component using the command below. nav is the subfolder. --flat is used to keep it from creating a navbar subfolder (default behavior is to create a subfolder)
+      <br>
+      ```ng generate component nav/navbar --flat```
+   1. Update navbar.component.html to use html template #3, and styles in navbar.component.css
+   1. Modify app.component.html to include nav-bar directive at the top:
+      ```html
+      <app-navbar></app-navbar>
+      <user-list></user-list>
+      ```
+
+1. Repeating data
+   * In UserList component, instead of passing a single user, we use *ngFor:
+      ```html
+      <user-thumbnail *ngFor="let userItem of users" [user]="userItem"></user-thumbnail>
+      ```
+      Alternatively we can use row, col divs as in html template #4
+   * *ngFor is a structural directive - it modifies the dom (as opposed to hiding). Therefore it has a * prefix
+
+1. Hiding content with *ngIf
+   * *ngIf removes the div from the dom, as opposed to hiding it
+     ```html
+        <div *ngIf="user?.location">
+            <span>Location: {{user.location.address}}</span>
+            <span class="pad-left">{{user.location.city}}, {{user.location.country}}</span>
+        </div>
+     ````
+   * alternatively you could use the html [hidden] directive to hide based on some condition. In this case the div element is still there, just hidden
+     ```<div [hidden]="!event?.location"> ...  ```
+
+1. ngSwitch: switch statement
+   * ngSwitch has no * prefix like *ngFor and *ngIf
+     ```html
+      <div [ngSwitch]="event?.time">
+         <span *ngSwitchCase="'8:00 am'">Early</span>
+         <span *ngSwitchCase="'10:00 am'">Late</span>
+         <span *ngSwitchDefault>Normal</span>
+      </div>
+      ```
+
+1. Conditionally add css classes to elements
+   1. Using class bindings:
+      <br>
+      ```<div [class.green]="event?.time === '8:00 am'" ...>```
+      <br>
+      this is a special type of binding called class binding and is parsed by angular. If this expression, i.e. event.time equals 8:00 am is true, then add the green class to the div
+   1. Using ngClass:
+      * ngClass inline
+      <br>
+      ```<div [ngClass]="{green: event?.time === '8:00 am', bold: event?.time === '8:00 am'}">...```
+      <br>
+      both green and bold classes will be applied if the condition is true
+      * or using a function:
+      <br>
+      ```<div [ngClass]="getClassFunction()">...```
+      <br>
+      and the function returns {green: true, bold: true} or {green: false, bold: false}, or better, the function can return a string like this: 'green bold' or array ['green', 'bold']
+      * if the div already had a class applied to it, like ```<div class="well" [ngClass]=...>```, then ngClass classes would be applied in addition to the "well" class
+   1. Styles can be applied using ngStyle
+      <br>
+      ```<div [ngStyle]="{'color': event?.time === '8am' ? '#003300' : '#bbb', 'font-weight':...">```
+      <br>
+      or using a function:
+      ```<div [ngStyle]="styleFunction()">...```
+      where the function returns: {color: '#003300', 'font-weight': 'bold'}
 
