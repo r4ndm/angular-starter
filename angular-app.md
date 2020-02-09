@@ -39,9 +39,10 @@ Staring point for angular projects. Contains a basic angular app with html templ
          ```json
          "extends": ["tslint:recommended", "tslint-plugin-prettier", "tslint-config-prettier"]
          "rules": {
-             "prettier": true,s
+             "prettier": true,
          }
          ```
+      1. Add .prettierrc.json and .prettierignore files
 
 1. Review angular.json, index.html, app.module.ts, app.component.ts, app.component.html, app.component.css
    1. app.module.ts, app.component.ts can be renamed to anything. These are not hard naming requirements
@@ -72,6 +73,10 @@ Staring point for angular projects. Contains a basic angular app with html templ
    <br>
    So index.html looks like #1 in html-templates.md
 
-
+1. Create the first component: user-list component. We can use ```ng generate component``` but we'll do this by hand this time
+   1. Create user/user-list.component.ts: create UserListComponent class, add @Component decorator with selector, templateUrl. Add a list of users
+   1. Create user-list.component.html. Use template #2
+   1. Update app.component.html to ```<user-list></user-list>```
+   1. Import and add UserListComponent to the declarations in AppModule
 
 
