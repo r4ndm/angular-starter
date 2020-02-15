@@ -1,40 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { IUser, ILocation } from './user.interface';
+import { UserService } from './services/user.service';
 
 @Component({
-    selector: 'user-list',
-    templateUrl: './user-list.component.html'
+  selector: 'app-user-list',
+  templateUrl: './user-list.component.html'
 })
-export class UserListComponent {
-    public users = userList;
-}
+export class UserListComponent implements OnInit {
+  public users = null;
 
-const userList: IUser[] = [
-    {
-        id: 1,
-        name: 'Bilbo Baggins',
-        email: 'bbaggins@hobbiton.com',
-        role: 'Hobbit chief',
-        dateJoined: '12/12/2001',
-        imageUrl: '',
-        location: {
-            address: '112 Bags End',
-            city: 'Hobbiton',
-            country: 'Shire'
-        }
-    },
-    {
-        id: 2,
-        name: 'Frodo Baggins',
-        email: 'fbaggins@hobbiton.com',
-        role: 'Adventurer',
-        dateJoined: '12/12/2001',
-        imageUrl: '',
-        location: {
-            address: '115 Bags End',
-            city: 'Hobbiton',
-            country: 'Shire'
-        }
-    }
-];
+  public constructor(private userService: UserService) {}
+
+  public ngOnInit() {
+    this.users = this.userService.getUsers();
+  }
+}

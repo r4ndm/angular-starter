@@ -83,7 +83,7 @@ Staring point for angular projects. Contains a basic angular app with html templ
 1. Create the UserThumbnail component:
    1. Create user/user-thumbnail.component.ts. Create an input (```@Input```) parameter ```user```. 
       1. Same view as previously (#2 in templates)
-      1. UserList component will display user-thumbnail and pass the user variable down using: ```<user-thumbnail> [user]=user[0]></user-thumbnail>```
+      1. UserList component will display user-thumbnail and pass the user variable down using: ```<user-thumbnail> [user]=users[0]></user-thumbnail>```
       1. Add the usual import, declarations in AppModule
 
 1. Input, output and template variables
@@ -158,7 +158,7 @@ Staring point for angular projects. Contains a basic angular app with html templ
    1. Using ngClass:
       * ngClass inline
       <br>
-      ```<div [ngClass]="{green: event?.time === '8:00 am', bold: event?.time === '8:00 am'}">...```
+      ```<div [ngClass]="{green: event?.time === '8:00 am', bold: event?.time === '8:00 am'}"> ...```
       <br>
       both green and bold classes will be applied if the condition is true
       * or using a function:
@@ -166,12 +166,19 @@ Staring point for angular projects. Contains a basic angular app with html templ
       ```<div [ngClass]="getClassFunction()">...```
       <br>
       and the function returns {green: true, bold: true} or {green: false, bold: false}, or better, the function can return a string like this: 'green bold' or array ['green', 'bold']
-      * if the div already had a class applied to it, like ```<div class="well" [ngClass]=...>```, then ngClass classes would be applied in addition to the "well" class
+      * if the div already had a class applied to it, like 
+      ```<div class="well" [ngClass]=...>```, then ngClass classes would be applied in addition to the "well" class
    1. Styles can be applied using ngStyle
-      <br>
-      ```<div [ngStyle]="{'color': event?.time === '8am' ? '#003300' : '#bbb', 'font-weight':...">```
-      <br>
-      or using a function:
-      ```<div [ngStyle]="styleFunction()">...```
+      ```html
+      <div [ngStyle]="{'color': event?.time === '8am' ? '#003300' : '#bbb', 'font-weight':...">
+      ```
+      or using a function: 
+      ```<div [ngStyle]="styleFunction()">...```,
       where the function returns: {color: '#003300', 'font-weight': 'bold'}
 
+1. Services
+   Services are used to create logic that is shared across components. This is done by simply creating a class, registering it in the ```Providers``` section in the module and injecting it into wherever component needs it.
+   1. Create a UserService class with a getUsers method that returns a list of users
+   1. Add it to the ```Providers``` section in app.module
+   1. Add it as a parameter in the UserListComponent constructor so it is injected in
+   1. While not necessary, it is better to mark the service with the ```@Injectable()``` decorator. This is required if the injectable class (e.g. UserService) has dependencies that need to be injected into it
