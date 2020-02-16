@@ -31,8 +31,8 @@
 #### Template 3
 Navbar component html:
    ```html
-    <div class="navbar navbar-default">
-     <div class="container-fluid">
+  <div class="navbar navbar-default">
+    <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" >UserNet</a>
       </div>
@@ -71,15 +71,15 @@ Navbar component html:
           </button>
         </form>
       </div>
-     </div>
     </div>
-    ```
-   Styles to go with the above:
-   ```css
-   .nav.navbar-nav { font-size: 15px; }
-   #searchForm { margin-right: 100px; }
-   @media (max-width: 1200px) {#searchForm {display: none}}
-   ```
+  </div>
+  ```
+  Styles to go with the above:
+  ```css
+  .nav.navbar-nav { font-size: 15px; }
+  #searchForm { margin-right: 100px; }
+  @media (max-width: 1200px) {#searchForm {display: none}}
+  ```
 
 #### Template 4
 row/col divs with ngFor
