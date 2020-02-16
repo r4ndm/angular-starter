@@ -1,3 +1,3 @@
 
 Starter angular app with basic modules, components and tooling.
-Details in angular-app.md
+Details in [angular-app.md](#angular-aop.md)
