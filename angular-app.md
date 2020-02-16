@@ -71,7 +71,7 @@ Staring point for angular projects. Contains a basic angular app with html templ
    <br>
    In index.html, replace ```<body>``` with ```<body class="container">```
    <br>
-   So index.html looks like #1 in html-templates.md
+   So index.html looks like [template #1](html-templates.md/#Template-1) in html-templates.md
 
 1. Create the first component: user-list component. We can use ```ng generate component``` but we'll do this by hand this time
    1. Create user/user-list.component.ts: create UserListComponent class, add @Component decorator with selector, templateUrl. Add a list of users
@@ -205,8 +205,8 @@ Staring point for angular projects. Contains a basic angular app with html templ
        { path: 'users', component: UserListComponent },
        { path: 'users/:id', component: UserDetailsComponent },
        { path: '', redirectTo: '/users', pathMatch: 'full' }
+     ];
      ```
-];
    * We need to include RouterModule in AppModule and initialize it with appRoutes:
      ```typescript
      imports: [
@@ -216,6 +216,7 @@ Staring point for angular projects. Contains a basic angular app with html templ
      ```
    * Good time to review base href ```<base href="/">``` in index.html in case the app is hosted in some path
    * To get the parameter value from the ```users/:id``` path, inject ```ActivatedRoute``` into the component and get the value using ```this.route.snapshot.params['id']```
+     * Note tslint doesn't like this. Use ```trhis.route.snapshot.params.id```
    * Router link: in the UserThumbnail template, we can add ```<div [routerLink]="['/users', 'user.id']"...>```. This will make it route to the user details page when we click on one of the user
    * Now we want to hook up the "All Users" navbar menu item to the main users page. Do do this, we add the same ```routerLink``` to the all users menu item in nav.component.html
    * ```[routerLink]``` is to navigate from html. To navigate in code, first inject ```Router``` into the component and then use ```this.router.navigate(['/users'])```

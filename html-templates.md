@@ -1,14 +1,15 @@
 
 ### Useful html templates for use in the app
 
-1. 
+
+#### Template 1
 ```html
 <body class="container">
   <app-root></app-root>
 </body>
 ```
 
-2.
+#### Template 2
 ```html
 <div>
     <h1>User List</h1>
@@ -27,7 +28,8 @@
 </div>
 ```
 
-3. Navbar component html:
+#### Template 3
+Navbar component html:
    ```html
     <div class="navbar navbar-default">
      <div class="container-fluid">
@@ -79,7 +81,8 @@
    @media (max-width: 1200px) {#searchForm {display: none}}
    ```
 
-4. row/col divs with ngFor
+#### Template 4
+row/col divs with ngFor
    ```html
    <div>
     <h1>Users</h1>
@@ -92,7 +95,8 @@
    </div>
    ````
 
-5. UserDetails component template:
+#### Template 5
+UserDetails component template:
    ```html
    <div>
      <img [src]="user?.imageUrl" [alt]="user?.name" class="user-image">
@@ -126,8 +130,10 @@
    .user-image { height: 100px; }
    ```
 
-6. css style for active link (add to navbar css):
+#### Template 6
+css style for active link (add to navbar css):
    ```css
    li > a.active { color: #F97924; }
    ```
-  
+
+
