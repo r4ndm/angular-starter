@@ -1,12 +1,10 @@
-<div>
-    <div class="well hoverwell thumbnail">
-        <h2>{{user.name}}</h2>
-        <div>Email: {{user.email}}</div>
-        <div>Role: {{user.role}}</div>
-        <div>Joined: {{user.dateJoined}}</div>
-        <div *ngIf="user?.location">
-            <span>Location: {{user.location.address}}</span>
-            <span class="pad-left">{{user.location.city}}, {{user.location.country}}</span>
-        </div>
+<div [routerLink]="['/users', user.id]" class="well hoverwell thumbnail">
+    <h2>{{user.name}}</h2>
+    <div>Email: {{user.email}}</div>
+    <div>Role: {{user.role}}</div>
+    <div>Joined: {{user.dateJoined}}</div>
+    <div *ngIf="user?.location">
+        <span>Location: {{user.location.address}}</span>
+        <span class="pad-left">{{user.location.city}}, {{user.location.country}}</span>
     </div>
 </div>

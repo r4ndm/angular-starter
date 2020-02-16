@@ -10,7 +10,7 @@ export class UserService {
       email: 'bbaggins@hobbiton.com',
       role: 'Hobbit chief',
       dateJoined: '12/12/2001',
-      imageUrl: '',
+      imageUrl: '/assets/images/angularconnect-shield.png',
       location: {
         address: '112 Bags End',
         city: 'Hobbiton',
@@ -23,7 +23,7 @@ export class UserService {
       email: 'fbaggins@hobbiton.com',
       role: 'Adventurer',
       dateJoined: '12/12/2001',
-      imageUrl: '',
+      imageUrl: '/assets/images/ng-vegas.png',
       location: {
         address: '115 Bags End',
         city: 'Hobbiton',
@@ -34,5 +34,9 @@ export class UserService {
 
   public getUsers(): IUser[] {
     return this.userList;
+  }
+
+  public getUser(id: number): IUser {
+    return this.userList.find(user => user.id === id);
   }
 }

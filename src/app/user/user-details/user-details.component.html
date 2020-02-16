@@ -1,0 +1,25 @@
+<div>
+    <img [src]="user?.imageUrl" [alt]="user?.name" class="user-image">
+  
+    <div class="row">
+      <div class="col-md-11">
+        <h2>{{user?.name}} </h2>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-6">
+        <div><strong>Email:</strong> {{user?.email}}</div>
+        <div><strong>Role:</strong> {{user?.role}}</div>
+        <div><strong>Date joined:</strong> ${{user?.dateJoined}}</div>
+      </div>
+      <div class="col-md-6">
+        <address>
+          <strong>Address:</strong><br />
+          {{user?.location?.address}}<br />
+          {{user?.location?.city}}, {{user?.location?.country}}
+        </address>
+      </div>
+    </div>
+  </div>
+  

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { IUser, ILocation } from './user.interface';
+import { IUser } from './user.interface';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { UserService } from './services/user.service';
   templateUrl: './user-list.component.html'
 })
 export class UserListComponent implements OnInit {
-  public users = null;
+  public users: IUser[] = null;
 
   public constructor(private userService: UserService) {}
 
