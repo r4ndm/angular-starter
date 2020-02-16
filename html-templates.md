@@ -92,3 +92,42 @@
    </div>
    ````
 
+5. UserDetails component template:
+   ```html
+   <div>
+     <img [src]="user?.imageUrl" [alt]="user?.name" class="user-image">
+
+     <div class="row">
+      <div class="col-md-11">
+        <h2>{{user?.name}} </h2>
+      </div>
+     </div>
+
+     <div class="row">
+       <div class="col-md-6">
+         <div><strong>Date:</strong> {{user?.date}}</div>
+         <div><strong>Time:</strong> {{user?.time}}</div>
+         <div><strong>Price:</strong> ${{user?.price}}</div>
+       </div>
+       <div class="col-md-6">
+         <address>
+           <strong>Address:</strong><br />
+             {{user?.location?.address}}<br />
+             {{user?.location?.city}}, {{user?.location?.country}}
+         </address>
+       </div>
+     </div>
+   </div>
+   ```
+
+   Style to go with this:
+   ```css
+   .container { padding-left: 20px; padding-right: 20px; }
+   .user-image { height: 100px; }
+   ```
+
+6. css style for active link (add to navbar css):
+   ```css
+   li > a.active { color: #F97924; }
+   ```
+  

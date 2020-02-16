@@ -182,3 +182,81 @@ Staring point for angular projects. Contains a basic angular app with html templ
    1. Add it to the ```Providers``` section in app.module
    1. Add it as a parameter in the UserListComponent constructor so it is injected in
    1. While not necessary, it is better to mark the service with the ```@Injectable()``` decorator. This is required if the injectable class (e.g. UserService) has dependencies that need to be injected into it
+
+1. Routing
+   * We'll create a new UserDetails component (```ng new component user-detail```). This component will get that user details from UserService and display the details in the details page
+   * use template #5
+   * selector is not needed in this component and can be removed because it is not used in any other component's template. It will be shown when it is routed to
+   * now we have a new component to display, how do we display it? For this we'll bring in routing
+   * app.component.html currently looks like this:
+     ```html
+     <app-navbar></app-navbar>
+     <app-user-list></app-user-list>
+     ```
+     This puts the navbar at the top and the user-list component below it which is displayed when the app is started. We want the bottom part to show whatever we are routing to, so we change app-component to:
+     ```html
+     <app-navbar></app-navbar>
+     <router-outlet></router-outlet>
+     ```
+     This also means we no longer need the ```<app-user-list>``` selector. This can be deleted in the UserList component
+   * Now we need to create a routes objects in routes.ts
+     ```typescript
+     export const appRoutes: Routes = [
+       { path: 'users', component: UserListComponent },
+       { path: 'users/:id', component: UserDetailsComponent },
+       { path: '', redirectTo: '/users', pathMatch: 'full' }
+     ```
+];
+   * We need to include RouterModule in AppModule and initialize it with appRoutes:
+     ```typescript
+     imports: [
+        BrowserModule,
+        RouterModule.forRoot(appRoutes)
+     ]
+     ```
+   * Good time to review base href ```<base href="/">``` in index.html in case the app is hosted in some path
+   * To get the parameter value from the ```users/:id``` path, inject ```ActivatedRoute``` into the component and get the value using ```this.route.snapshot.params['id']```
+   * Router link: in the UserThumbnail template, we can add ```<div [routerLink]="['/users', 'user.id']"...>```. This will make it route to the user details page when we click on one of the user
+   * Now we want to hook up the "All Users" navbar menu item to the main users page. Do do this, we add the same ```routerLink``` to the all users menu item in nav.component.html
+   * ```[routerLink]``` is to navigate from html. To navigate in code, first inject ```Router``` into the component and then use ```this.router.navigate(['/users'])```
+   * Route guard: to add validation before routing. For example, validate id in ```/user/:id``` is valid:
+      * create an injectable service ```UserRouteActivator``` that implements ```CanActivate```
+      * implement a ```canActivate``` method that returns true or false. If return false then navigation is cancelled. App then navigates to the base url. Other return types are possible for finer control, for example returning a ```UrlTree``` for navigation
+      * route is already passed in to this method as the first argument of type ```ActivatedRouteSnapshot```. Cann get route parameters from here ```route.params['id']```
+      * in the validation logic, you can redirect to an errors page. To do this, inject ```Router``` and use ```router.navigate(['/404'])```
+      * add this service to app.module Providers, since it is a service
+      * in the routes object, add canActivate like: ```{ path: 'users/:id', component: UserDetailsComponent, canActivate: [UserRouteActivator] }```
+      * Similar to route activation, we can guard against route deactivation. For example to warn user from navigating out when there are unsaved changes. This can be done with the ```canDeactivate``` parameter in the path, implemented same way as ```canActivate```
+      * BTW the activator/deactivator in path doesn't have to be a class. It can be a function. You'll have to use the long form of provider:
+        ```typescript
+        {
+          provide: 'canDeactivateCreateUser',
+          useValue: 'myMethodForDeactivationCheck'
+        }
+        ```
+        The first argument to the canDeactivate method is the component itself, so you can check state of the component in the deactivation logic
+      * Pre-loading data for component: if you want to load data before rendering a component, you can implement a ```Resolver``` service. Then use this service in the ```resolve``` parameter in the route. 
+        ```typescript
+        { path: 'users', component: UserListComponent, resolve: {users: UserListResolver} }
+        ```
+        The data returned from the resolver is made available to the component with the ```users``` route parameter as specified in the resolve parameter above. This can be accessed in the component as:
+        ```typescript
+        ngOnInit() {
+           this.users = this.route.snapshot.data['events'];
+        }
+        ```
+        The difference between this and doing all the work in ngOnInit is that with the resolver, the component is not rendered till the data is available. Without resolver, the component is rendered before ngOnInit is done
+     * Styling active links can be done by adding a ```routerLinkActive``` directive:
+       ```html
+       <a [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">All Users</a>
+       ```
+       and then define the "active" class in css (html template #6)
+     * Summary:
+       * To add routing, create a routes object with the appropriate paths and corresponding components
+       * Import ```RouterModule``` in app.module and pass in the routes object
+       * Navigate to routes either from html using ```[routerLink]``` or in code using ```router.navigate```
+       * Add router guards through canActivate and canDeactivate services
+       * Style active links using ```routerLinkActive``` directive and active class styling
+
+
+

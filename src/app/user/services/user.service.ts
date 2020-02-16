@@ -10,7 +10,7 @@ export class UserService {
       email: 'bbaggins@hobbiton.com',
       role: 'Hobbit chief',
       dateJoined: '12/12/2001',
-      imageUrl: '/assets/images/angularconnect-shield.png',
+      imageUrl: '/assets/images/bilbobaggins.jpg',
       location: {
         address: '112 Bags End',
         city: 'Hobbiton',
@@ -23,7 +23,7 @@ export class UserService {
       email: 'fbaggins@hobbiton.com',
       role: 'Adventurer',
       dateJoined: '12/12/2001',
-      imageUrl: '/assets/images/ng-vegas.png',
+      imageUrl: '/assets/images/frodobaggins.png',
       location: {
         address: '115 Bags End',
         city: 'Hobbiton',
