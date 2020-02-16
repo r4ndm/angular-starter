@@ -71,18 +71,18 @@ Staring point for angular projects. Contains a basic angular app with html templ
    <br>
    In index.html, replace ```<body>``` with ```<body class="container">```
    <br>
-   So index.html looks like [template #1](html-templates.md/#Template-1) in html-templates.md
+   So index.html looks like [template 1](html-templates.md/#Template-1) in html-templates.md
 
 1. Create the first component: user-list component. We can use ```ng generate component``` but we'll do this by hand this time
    1. Create user/user-list.component.ts: create UserListComponent class, add @Component decorator with selector, templateUrl. Add a list of users
       1. NOTE the ```user``` parameter cannot be private. Private variables are not visible from the template
-   1. Create user-list.component.html. Use template #2
+   1. Create user-list.component.html. Use [template 2](html-templates.md/#Template-2) 
    1. Update app.component.html to ```<user-list></user-list>```
    1. Import and add UserListComponent to the declarations in AppModule
 
 1. Create the UserThumbnail component:
    1. Create user/user-thumbnail.component.ts. Create an input (```@Input```) parameter ```user```. 
-      1. Same view as previously (#2 in templates)
+      1. Same view as previously ([template 2](html-templates.md/#Template-2))
       1. UserList component will display user-thumbnail and pass the user variable down using: ```<user-thumbnail> [user]=users[0]></user-thumbnail>```
       1. Add the usual import, declarations in AppModule
 
@@ -113,7 +113,7 @@ Staring point for angular projects. Contains a basic angular app with html templ
    1. Create the NavBar component using the command below. nav is the subfolder. --flat is used to keep it from creating a navbar subfolder (default behavior is to create a subfolder)
       <br>
       ```ng generate component nav/navbar --flat```
-   1. Update navbar.component.html to use html template #3, and styles in navbar.component.css
+   1. Update navbar.component.html to use html [template 3](html-templates.md/#Template-3), and styles in navbar.component.css
    1. Modify app.component.html to include nav-bar directive at the top:
       ```html
       <app-navbar></app-navbar>
@@ -125,7 +125,7 @@ Staring point for angular projects. Contains a basic angular app with html templ
       ```html
       <user-thumbnail *ngFor="let userItem of users" [user]="userItem"></user-thumbnail>
       ```
-      Alternatively we can use row, col divs as in html template #4
+      Alternatively we can use row, col divs as in html [template 4](html-templates.md/#Template-4)
    * *ngFor is a structural directive - it modifies the dom (as opposed to hiding). Therefore it has a * prefix
 
 1. Hiding content with *ngIf
@@ -185,7 +185,7 @@ Staring point for angular projects. Contains a basic angular app with html templ
 
 1. Routing
    * We'll create a new UserDetails component (```ng new component user-detail```). This component will get that user details from UserService and display the details in the details page
-   * use template #5
+   * use [template 5](html-templates.md/#Template-5)
    * selector is not needed in this component and can be removed because it is not used in any other component's template. It will be shown when it is routed to
    * now we have a new component to display, how do we display it? For this we'll bring in routing
    * app.component.html currently looks like this:
@@ -251,7 +251,7 @@ Staring point for angular projects. Contains a basic angular app with html templ
        ```html
        <a [routerLink]="['/users']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">All Users</a>
        ```
-       and then define the "active" class in css (html template #6)
+       and then define the "active" class in css (html [template 6](html-templates.md/#Template-6))
      * Summary:
        * To add routing, create a routes object with the appropriate paths and corresponding components
        * Import ```RouterModule``` in app.module and pass in the routes object
