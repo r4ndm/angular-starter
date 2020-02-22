@@ -21,4 +21,10 @@ describe('NavbarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have navbar brand', () => {
+    const compiled = fixture.nativeElement;
+    const navbarBrand = compiled.querySelector('.navbar-brand').textContent;
+    expect(navbarBrand).toBe('UserNet');
+  });
 });

@@ -259,5 +259,7 @@ Staring point for angular projects. Contains a basic angular app with html templ
        * Add router guards through canActivate and canDeactivate services
        * Style active links using ```routerLinkActive``` directive and active class styling
 
-
+1. Testing
+   * Unit tests with Jasmine and Karma, e.g. user.service.spec.ts and for components
+   * e2d tests
 
