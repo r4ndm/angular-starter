@@ -261,5 +261,5 @@ Staring point for angular projects. Contains a basic angular app with html templ
 
 1. Testing
    * Unit tests with Jasmine and Karma, e.g. user.service.spec.ts and for components
-   * e2d tests
+   * Use TestBed to create tests that instantiate component with templates
 
