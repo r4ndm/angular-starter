@@ -11,7 +11,7 @@ Staring point for angular projects. Contains a basic angular app with html templ
 1. VSCode (used here) or some editor
 1. Optional:
    1. git (if needed) is installed and initialized (git init, git remote add origin ...). Could be done later
-   1. Prettier VSCode plugin - to format from within VSCode editor. .vscode/settings.json has settings for this project. NOTE Prettier is not set as the default formatter at the workspace level. Doing so will keep the project from being opened if Prettier extension is not installed. If you have Prettier, you may want to set it as the default formatter in your user level settings.json:
+   1. Install Prettier VSCode plugin - to format from within VSCode editor. .vscode/settings.json has settings for this project. NOTE Prettier is *not* set as the default formatter at the workspace level. Doing so will keep the project from being opened if Prettier extension is not installed. If you have Prettier, you may want to set it as the default formatter in your user level settings.json:
    ```json
        "[typescript]": {
            "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -20,6 +20,7 @@ Staring point for angular projects. Contains a basic angular app with html templ
            "editor.defaultFormatter": "esbenp.prettier-vscode"
        }
     ```
+      1. Add .prettierrc.json and .prettierignore files in the workspace
 
 #### Steps
 1. Create a new angular application:
@@ -31,18 +32,37 @@ Staring point for angular projects. Contains a basic angular app with html templ
 
 1. Config
    1. tsconfig.json - any typescript compiler specific changes you may want to make. No changes made in this project
-   1. tslint -  Angular is still using tslint. Update tslint.json settings if needed. No changes made in this project
-   1. Integrate Prettier with tslint (https://prettier.io/docs/en/integrating-with-linters.html#tslint):
-      1. Install prettier and tslint extensions:<br>
+   1. **tslint is now obsolete**. Use eslint instead (next step):
+      1. tslint -  Angular is still using tslint. Update tslint.json settings if needed. No changes made in this project
+      1. Integrate Prettier with tslint (https://prettier.io/docs/en/integrating-with-linters.html#tslint):
+         1. Install prettier and tslint extensions:<br>
          ```npm install prettier tslint-config-prettier tslint-plugin-prettier --save-dev```
-      1. Update tslint.json to add the config:<br>
+         1. Update tslint.json to add the config:<br>
          ```json
          "extends": ["tslint:recommended", "tslint-plugin-prettier", "tslint-config-prettier"]
          "rules": {
              "prettier": true,
          }
          ```
-      1. Add .prettierrc.json and .prettierignore files
+   1. eslint:
+      1.  (Angular CLI 14 and above) Run "ng lint". First time this is run it will install and configure eslint. It installs @angular-eslint and @typescript-eslint packages and creates a .eslintrc.json file
+      1.  Extend eslintrc.json to add the following depending upon the level of strictness needed:
+          ```json
+          "extends": [
+            "plugin:@angular-eslint/recommended",
+            "plugin:@angular-eslint/template/process-inline-templates",
+            "plugin:@typescript-eslint/recommended",
+            "plugin:@typescript-eslint/recommended-requiring-type-checking",
+            "plugin:@typescript-eslint/strict"
+          ]
+          ```
+      1. Other eslint settings:
+         1.  https://angular.io/guide/typescript-configuration When the noImplicitAny flag is true, you may get implicit index errors as well. Most developers feel that this particular error is more annoying than helpful. You can suppress them with the following additional flag:
+           ```"suppressImplicitAnyIndexErrors": true```
+         1. To force functions to specify a return type, you have to use typescript-eslint: https://typescript-eslint.io/rules/explicit-function-return-type/
+      1. If using prettier, add prettier to eslintrc to disable any rules that conflict with prettier formatting (https://typescript-eslint.io/docs/linting/configs/)
+         1. npm install eslint-config-prettier --save-dev
+         1. add "prettier" to eslintrc.json "extents" array  
 
 1. Review angular.json, index.html, app.module.ts, app.component.ts, app.component.html, app.component.css
    1. app.module.ts, app.component.ts can be renamed to anything. These are not hard naming requirements
